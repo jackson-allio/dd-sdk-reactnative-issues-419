@@ -20,6 +20,7 @@ describe("App.tsx", () => {
     );
   });
   it("renders without the React.memo override", async () => {
+    // When we bypass the areObjectShallowEqual entirely and always return false, this should just treat the component as if it is not memoized at all
     jest.spyOn(ddSdk, "areObjectShallowEqual").mockImplementation(() => false);
     await waitFor(() => render(<App />));
     expect(screen.findByText("Async is true")).toBeTruthy();
